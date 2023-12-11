@@ -46,7 +46,6 @@ namespace StudentsWebApplication
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-         //   app.UseMvcWithDefaultRoute();
 
             app.UseRouting();
             app.UseAuthorization();
