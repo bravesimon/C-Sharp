@@ -16,15 +16,11 @@ namespace StudentsWebApplication.Controllers
         
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(StudentsDbContext context)
-        {
-            _context = context;
-        }
-
-      /*  public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, StudentsDbContext context)
         {
             _logger = logger;
-        }*/
+            _context = context;
+        }
 
         public IActionResult Index()
         {
