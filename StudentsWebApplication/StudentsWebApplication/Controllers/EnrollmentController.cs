@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using StudentsWebApplication.Data;
+using StudentsWebApplication.Models;
 using System.Linq;
 
 namespace StudentsWebApplication.Controllers
@@ -13,6 +14,22 @@ namespace StudentsWebApplication.Controllers
         public EnrollmentController(StudentsDbContext context)
         {
             _context = context;
+        }
+
+        public IActionResult EnrollmentsList2() => View();
+
+        public JsonResult GetEnrollments()
+        {
+            var enrollments = _context.Enrollments
+            .Include(e => e.Course)
+            .Include(e => e.Student)
+            .Select(e => new EnrollmentListVM
+            {
+                CourseTitle = e.Course.Title,
+                StudentFullName = $"{e.Student.LastName} {e.Student.FirstMidName}",
+                Grade = e.Grade.ToString()
+            });
+            return Json(enrollments.ToList());
         }
 
         public IActionResult EnrollmentsList(string sortOrder, string searchString)

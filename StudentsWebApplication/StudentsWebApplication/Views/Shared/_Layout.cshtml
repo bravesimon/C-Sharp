@@ -6,21 +6,30 @@
     <title>@ViewData["Title"] - StudentsWebApplication</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css" />
+
+    <style>
+        .page-background {
+            background-image: url(https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngall.com%2Fwp-content%2Fuploads%2F8%2FUniversity-Student.png&f=1&nofb=1&ipt=5c43845046fd6e1f8c79d653b19225ce800b20c023ceb1da62d5724965bcdcd7&ipo=images);
+            background-repeat: no-repeat;
+            background-size: 80% 90%;
+            background-position: center;
+        }
+    </style>
+
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">StudentsWebApplication</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Főoldal</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Főoldal</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Hallgatók</a>
                         </li>
@@ -31,10 +40,13 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="DateReport" asp-action="EnrollmentDateReport">Első jelentkezések</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="StudentReport" asp-action="StudentCreditReport">Tanulók kreditjei</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="StudentReport" asp-action="StudentCreditReport">Kreditek</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Enrollment" asp-action="EnrollmentsList">Jelentkezések</a>
+                        </li>
+                        <li class ="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Enrollment" asp-action="EnrollmentsList2">Jelentkezések-JS</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Adatvédelem</a>
@@ -44,6 +56,7 @@
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -55,9 +68,12 @@
             &copy; 2023 - StudentsWebApplication - <a asp-area="" asp-controller="Home" asp-action="Privacy">Adatvédelem</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
