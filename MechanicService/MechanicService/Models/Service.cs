@@ -17,7 +17,7 @@ namespace MechanicService.Models
         [Display(Name = "Egyeb informacio")]
         public string? Information { get; set; }
 
-        public int ServiceHistoryId { get; set; }
-        public virtual ServiceHistory ServiceHistory { get; set; }
+        public int VehicleId { get; set; }
+        public virtual Vehicle Vehicle { get; set; }
     }
 }

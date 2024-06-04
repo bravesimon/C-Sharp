@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MechanicService.Migrations
 {
     [DbContext(typeof(ServiceDbContext))]
-    [Migration("20240602140241_Initial2")]
-    partial class Initial2
+    [Migration("20240604171402_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -128,8 +128,7 @@ namespace MechanicService.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId")
-                        .IsUnique();
+                    b.HasIndex("AddressId");
 
                     b.ToTable("Clients");
 
@@ -180,12 +179,12 @@ namespace MechanicService.Migrations
                     b.Property<bool>("IsDone")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("ServiceHistoryId")
+                    b.Property<int>("VehicleId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ServiceHistoryId");
+                    b.HasIndex("VehicleId");
 
                     b.ToTable("Services");
 
@@ -196,7 +195,7 @@ namespace MechanicService.Migrations
                             Date = new DateTime(2003, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Information = "",
                             IsDone = true,
-                            ServiceHistoryId = 0
+                            VehicleId = 1
                         },
                         new
                         {
@@ -204,7 +203,7 @@ namespace MechanicService.Migrations
                             Date = new DateTime(2004, 3, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Information = "",
                             IsDone = true,
-                            ServiceHistoryId = 0
+                            VehicleId = 1
                         },
                         new
                         {
@@ -212,7 +211,7 @@ namespace MechanicService.Migrations
                             Date = new DateTime(2004, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Information = "",
                             IsDone = true,
-                            ServiceHistoryId = 0
+                            VehicleId = 1
                         },
                         new
                         {
@@ -220,7 +219,7 @@ namespace MechanicService.Migrations
                             Date = new DateTime(2024, 6, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Information = "",
                             IsDone = true,
-                            ServiceHistoryId = 0
+                            VehicleId = 2
                         },
                         new
                         {
@@ -228,59 +227,6 @@ namespace MechanicService.Migrations
                             Date = new DateTime(2024, 7, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Information = "fek allitas lesz",
                             IsDone = false,
-                            ServiceHistoryId = 0
-                        });
-                });
-
-            modelBuilder.Entity("MechanicService.Models.ServiceHistory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("VehicleId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("VehicleId");
-
-                    b.ToTable("ServiceHistories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ServiceId = 1,
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ServiceId = 2,
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ServiceId = 3,
-                            VehicleId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ServiceId = 4,
-                            VehicleId = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ServiceId = 5,
                             VehicleId = 3
                         });
                 });
@@ -341,8 +287,8 @@ namespace MechanicService.Migrations
             modelBuilder.Entity("MechanicService.Models.Client", b =>
                 {
                     b.HasOne("MechanicService.Models.Address", "Address")
-                        .WithOne("Client")
-                        .HasForeignKey("MechanicService.Models.Client", "AddressId")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -350,17 +296,6 @@ namespace MechanicService.Migrations
                 });
 
             modelBuilder.Entity("MechanicService.Models.Service", b =>
-                {
-                    b.HasOne("MechanicService.Models.ServiceHistory", "ServiceHistory")
-                        .WithMany("Services")
-                        .HasForeignKey("ServiceHistoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ServiceHistory");
-                });
-
-            modelBuilder.Entity("MechanicService.Models.ServiceHistory", b =>
                 {
                     b.HasOne("MechanicService.Models.Vehicle", "Vehicle")
                         .WithMany()
@@ -382,20 +317,9 @@ namespace MechanicService.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("MechanicService.Models.Address", b =>
-                {
-                    b.Navigation("Client")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("MechanicService.Models.Client", b =>
                 {
                     b.Navigation("Vehicles");
-                });
-
-            modelBuilder.Entity("MechanicService.Models.ServiceHistory", b =>
-                {
-                    b.Navigation("Services");
                 });
 #pragma warning restore 612, 618
         }

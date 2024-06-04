@@ -1,18 +1,16 @@
 ﻿using MechanicService.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace MechanicService.Data
 {
-    // Initial not woring because already in use in another project of mine
-    // dotnet ef migrations add Initial2 --startup-project MechanicService --verbose
+    // in package manager console:
+    // dotnet ef migrations add Initial --startup-project MechanicService --verbose
     // dotnet ef database update --startup-project MechanicService --verbose
     public class ServiceDbContext : DbContext
     {
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Service> Services { get; set; }
-        public DbSet<ServiceHistory> ServiceHistories{ get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
 
         public ServiceDbContext(DbContextOptions<ServiceDbContext> options) 
@@ -35,31 +33,19 @@ namespace MechanicService.Data
                 new Client { Id = 3, FirstMidName = "Ferenc", LastName = "Kiss", Email = "asd3@temp.com", PhoneNumber = "+36701234567", AddressId = 3}
             );
 
-            modelBuilder.Entity<Service>().HasData(
-                new Service { Id = 1, Date = DateTime.Parse("2003-11-01"), IsDone = true, Information = "", },
-                new Service { Id = 2, Date = DateTime.Parse("2004-03-01"), IsDone = true, Information = "", },
-                new Service { Id = 3, Date = DateTime.Parse("2004-06-01"), IsDone = true, Information = "", },
-                new Service { Id = 4, Date = DateTime.Parse("2024-06-01"), IsDone = true, Information = "", },
-                new Service { Id = 5, Date = DateTime.Parse("2024-07-21"), IsDone = false, Information = "fek allitas lesz", }
-            );
-
-
             modelBuilder.Entity<Vehicle>().HasData(
                 new Vehicle { Id = 1, BoughtTime = DateTime.Parse("2003-09-01"), IsWarrantyActive = false, Type = VehicleType.Coupe, ClientID=1 },
                 new Vehicle { Id = 2, BoughtTime = DateTime.Parse("2023-09-01"), IsWarrantyActive = true, Type = VehicleType.SUV, ClientID = 2 },
                 new Vehicle { Id = 3, BoughtTime = DateTime.Parse("2024-05-01"), IsWarrantyActive = true, Type = VehicleType.Salon, ClientID = 3 }
             );
-
-            modelBuilder.Entity<ServiceHistory>().HasData(
-                new ServiceHistory { Id = 1, ServiceId = 1, VehicleId = 1 },
-                new ServiceHistory { Id = 2, ServiceId = 2, VehicleId = 1 },
-                new ServiceHistory { Id = 3, ServiceId = 3, VehicleId = 1 },
-
-                new ServiceHistory { Id = 4, ServiceId = 4, VehicleId = 2 },
-                
-                new ServiceHistory { Id = 5, ServiceId = 5, VehicleId = 3 }
-            );
-
+           
+            modelBuilder.Entity<Service>().HasData(
+                 new Service { Id = 1, Date = DateTime.Parse("2003-11-01"), IsDone = true, Information = "", VehicleId = 1 },
+                 new Service { Id = 2, Date = DateTime.Parse("2004-03-01"), IsDone = true, Information = "", VehicleId = 1 },
+                 new Service { Id = 3, Date = DateTime.Parse("2004-06-01"), IsDone = true, Information = "", VehicleId = 1 },
+                 new Service { Id = 4, Date = DateTime.Parse("2024-06-01"), IsDone = true, Information = "", VehicleId = 2 },
+                 new Service { Id = 5, Date = DateTime.Parse("2024-07-21"), IsDone = false, Information = "fek allitas lesz", VehicleId = 3 }
+             );
         }
     }
 }

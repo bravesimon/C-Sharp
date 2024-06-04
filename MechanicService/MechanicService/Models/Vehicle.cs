@@ -3,6 +3,7 @@
 namespace MechanicService.Models
 {
     public enum VehicleType { Cabrio, Coupe, Salon, SUV, Combo }
+
     public class Vehicle
     {
         public int Id { get; set; }

@@ -32,7 +32,5 @@ namespace MechanicService.Models
 
         [Display(Name = "Egyeb informacio")]
         public string? Information { get; set; }
-
-        public virtual Client Client { get; set; }
     }
 }

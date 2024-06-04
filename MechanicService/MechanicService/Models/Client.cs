@@ -23,7 +23,7 @@ namespace MechanicService.Models
         public string PhoneNumber{ get; set; }
 
         [Display(Name = "Cim azonosito")]
-        public virtual int AddressId { get; set; }
+        public int AddressId { get; set; }
 
         [Display(Name = "Cim")]
         [Required(ErrorMessage = "Kitöltése kötelező!")]
