@@ -1,0 +1,35 @@
+﻿@model IEnumerable<NotDoneServicesVM>
+
+@{
+    ViewData["Title"] = "Not done services";
+}
+
+<h2>Lists not done services</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th> FirstName </th>
+            <th> LastName </th>
+            <th> Email </th>
+            <th> Phone </th>
+            <th> City </th>
+            <th> IsWarrantyActive </th>
+            <th> Date </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td> @item.FirstName </td>
+                <td> @item.LastName </td>
+                <td> @item.Email </td>
+                <td> @item.Phone </td>
+                <td> @item.City </td>
+                <td> @item.IsWarrantyActive </td>
+                <td> @item.Date </td>
+            </tr>
+        }
+    </tbody>
+</table>
