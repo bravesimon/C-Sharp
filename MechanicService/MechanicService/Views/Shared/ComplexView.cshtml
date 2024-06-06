@@ -1,0 +1,32 @@
+﻿@model IEnumerable<ComplexVM>
+
+@{
+    ViewData["Title"] = "Data in complex view";
+}
+
+<h2>Data in complex view</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th> FirstName </th>
+            <th> LastName </th>
+            <th> VehicleType </th>
+            <th> IsWarrantyActive </th>
+            <th> Date </th>
+            <th> IsDone </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td> @item.FirstName </td>
+                <td> @item.LastName </td>
+                <td> @item.VehicleType </td>
+                <td> @item.IsWarrantyActive </td>
+                <td> @item.Date </td>
+                <td> @item.IsDone </td>
+            </tr>
+        }
+    </tbody>
+</table>
